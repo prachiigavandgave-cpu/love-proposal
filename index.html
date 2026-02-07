@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hey You ❤️</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      text-align:center;
+      background:white;
+      padding:40px;
+    }
+    section{ margin:80px 0; font-size:22px; }
+    img{ width:220px; border-radius:15px; margin:10px; }
+    button{
+      font-size:20px; padding:12px 30px;
+      background:pink; border:none; border-radius:10px;
+      cursor:pointer;
+    }
+    canvas{
+      position:fixed; top:0; left:0; pointer-events:none;
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<section>
+  <h1>Hey you 👀</h1>
+  <p>I made something just for you.</p>
+</section>
+
+<section>
+  <p>Your eyes.</p>
+  <p>Your smile.</p>
+  <p>Your voice.</p>
+  <p>Your name.</p>
+  <b>You became my everything.</b>
+</section>
+
+<section>
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+</section>
+
+<section>
+  <h2>Will you be my Valentine? ❤️</h2>
+  <button onclick="valentineYes()">YES ❤️</button>
+</section>
+
+<script>
+function valentineYes(){
+  startConfetti();
+  setTimeout(()=>{
+    window.location.href = "love.html";
+  }, 2500); // 2.5 sec baad I LOVE YOU page
+}
+
+// CONFETTI
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let pieces=[];
+
+function startConfetti(){
+  for(let i=0;i<150;i++){
+    pieces.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*6+4,
+      d:Math.random()*5+2
+    });
+  }
+  update();
+}
+
+function update(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="pink";
+  pieces.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+    p.y+=p.d;
+    if(p.y>canvas.height) p.y=0;
+  });
+  requestAnimationFrame(update);
+}
+</script>
+
+</body>
+</html>
